@@ -17,4 +17,3 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-// create a function witch connect local computer on mongoose and create a database
