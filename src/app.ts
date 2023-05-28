@@ -3,7 +3,6 @@ import { Application, Request, Response } from "express";
 import express from "express";
 import cors from "cors";
 
-
 const app: Application = express();
 const port: number = 5000;
 
@@ -19,4 +18,4 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-export  {app, port};
+export { app, port };

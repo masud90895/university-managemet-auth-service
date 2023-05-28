@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import { app, port } from "./app";
-import config  from "./config/index";
-
-
+import config from "./config/index";
 
 // connect mongoose function
 async function main() {
@@ -15,7 +13,6 @@ async function main() {
   } catch (error) {
     console.log(`Failed to connect to MongoDB ${error}`);
   }
-  
 }
 
-main()
+main();
