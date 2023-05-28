@@ -1,20 +1,21 @@
 import mongoose from "mongoose";
+import { app, port } from "./app";
+import config  from "./config/index";
 
-const express: any = require("express");
-const app: any = express();
-const port: number = 5000;
-const cors: any = require("cors");
 
-app.use(cors());
 
-app.get("/", (req: any, res: any) => {
-  // Send a response to the browser
-  res.send("Hello World!");
-});
+// connect mongoose function
+async function main() {
+  try {
+    await mongoose.connect(config.database_url as string);
+    app.listen(config.port, () => {
+      // Log a message to the terminal
+      console.log(`Example app listening on port ${config.port}`);
+    });
+  } catch (error) {
+    console.log(`Failed to connect to MongoDB ${error}`);
+  }
+  
+}
 
-app.listen(port, () => {
-  // Log a message to the terminal
-  console.log(`Example app listening on port ${port}`);
-});
-
-// create a function witch connect local computer on mongoose and create a database
+main()
