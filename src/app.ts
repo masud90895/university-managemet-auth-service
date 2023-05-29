@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
 
-app.get('/', (req: Request, res: any) => {
+app.get('/', (req: Request, res: Response) => {
   // Send a response to the browser
   res.send('Hello World!')
 })
