@@ -7,6 +7,7 @@
     "start": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "link:fix": "eslint --fix",
+    "lint-prettier": "yarn lint:check && yarn prettier:check",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,8 +25,13 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "typescript": "*"
+  },
+  "lint-staged": {
+    "./src/**/*.ts": "yarn lint-prettier"
   },
   "dependencies": {
     "cors": "^2.8.5",
