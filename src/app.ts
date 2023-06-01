@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 //application  route
-console.log('object')
+
 app.use('/api/v1/users/', userRouter)
 
 app.get('/', async (req: Request, res: Response) => {
