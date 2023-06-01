@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Import .env
 import dotenv from 'dotenv'
 import path from 'path'

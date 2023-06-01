@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 //import express from "express";
 import { Application, Request, Response } from 'express'
 import express from 'express'
@@ -13,6 +14,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
+
+//console env
+console.log(app.get('env'))
 
 //application  route
 
