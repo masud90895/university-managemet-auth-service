@@ -15,9 +15,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
 
-//console env
-console.log(app.get('env'))
-
 //application  route
 
 app.use('/api/v1/users/', userRouter)
