@@ -1,4 +1,3 @@
-// create controller
 import { Request, Response } from 'express'
 import userService from './user.service'
 
