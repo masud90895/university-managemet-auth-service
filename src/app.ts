@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 //import express from "express";
-import { Application, Request, Response } from 'express'
+import { Application } from 'express'
 import express from 'express'
 import cors from 'cors'
-import userRouter from './app/modules/user/user.route'
+import globalErrorHandler from './app/middlewares/globalErrorHandler'
+import { UserRoute } from './app/modules/user/user.route'
 
 const app: Application = express()
 const port = 5000
@@ -17,11 +17,13 @@ app.use(cors())
 
 //application  route
 
-app.use('/api/v1/users/', userRouter)
+app.use('/api/v1/users/', UserRoute)
+// use globalErrorHandler
+app.use(globalErrorHandler)
 
-app.get('/', async (req: Request, res: Response) => {
-  // Send a response to the browser
-  res.send('Hello World!')
-})
+// testing
+// app.get('/', (req: Request, res: Response, next: NextFunction) => {
+//   throw new ApiError(404, 'Not Found')
+// })
 
 export { app, port }
