@@ -8,7 +8,7 @@ import { errorLogger } from '../../shared/logger'
 
 //create global express error middleware
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
-  if (config.env === 'development') {
+  if (config?.env === 'development') {
     console.log('Global Error Handler ~~', error)
   } else {
     errorLogger.error('Global Error Handler ~~', error)

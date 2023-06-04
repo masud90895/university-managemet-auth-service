@@ -1,9 +1,10 @@
 //import express from "express";
-import { Application } from 'express'
+import { Application /* NextFunction, Request, Response  */ } from 'express'
 import express from 'express'
 import cors from 'cors'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
 import { UserRoute } from './app/modules/user/user.route'
+// import ApiError from './errors/ApiError'
 
 const app: Application = express()
 const port = 5000
@@ -18,13 +19,14 @@ app.use(cors())
 //application  route
 
 app.use('/api/v1/users/', UserRoute)
-// use globalErrorHandler
-app.use(globalErrorHandler)
 
 // testing
-// app.get('/', (req: Request, res: Response, next: NextFunction) => {
-//   throw new ApiError(404, 'Not Found')
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   Promise.reject(new Error('Unhandled Promise Rejection'))
 // })
+
+// use globalErrorHandler
+app.use(globalErrorHandler)
 
 // console.log("object");
 
