@@ -26,4 +26,6 @@ app.use(globalErrorHandler)
 //   throw new ApiError(404, 'Not Found')
 // })
 
+// console.log("object");
+
 export { app, port }
