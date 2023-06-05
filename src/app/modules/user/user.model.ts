@@ -1,6 +1,6 @@
-import { model } from 'mongoose'
-import { IUser, UserModel } from './user.interface'
-import { Schema } from 'mongoose'
+import { model } from 'mongoose';
+import { IUser, UserModel } from './user.interface';
+import { Schema } from 'mongoose';
 
 // create as schema for user
 const userSchema = new Schema<IUser>(
@@ -22,9 +22,9 @@ const userSchema = new Schema<IUser>(
   {
     timestamps: true,
   }
-)
+);
 
 //create a model for user statics
-const User = model<IUser, UserModel>('User', userSchema)
+const User = model<IUser, UserModel>('User', userSchema);
 
-export default User
+export default User;

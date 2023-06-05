@@ -1,22 +1,22 @@
 /* eslint-disable no-undef */
-import { createLogger, format, transports } from 'winston'
-import path from 'path'
-const { combine, timestamp, label, printf, prettyPrint } = format
+import { createLogger, format, transports } from 'winston';
+import path from 'path';
+const { combine, timestamp, label, printf, prettyPrint } = format;
 //import DailyRotateFile from 'winston-daily-rotate-file'
-import DailyRotateFile from 'winston-daily-rotate-file'
+import DailyRotateFile from 'winston-daily-rotate-file';
 
 //create custom format
 const customFormat = printf(({ level, message, timestamp, label }) => {
   //find date
-  const date = new Date(timestamp)
+  const date = new Date(timestamp);
   //fnd hours
-  const hours = date.getHours()
+  const hours = date.getHours();
   //find minutes
-  const minutes = date.getMinutes()
+  const minutes = date.getMinutes();
   //find seconds
-  const seconds = date.getSeconds()
-  return `${date.toDateString()} ${hours}:${minutes}:${seconds} ${label} => ${level}: ${message}`
-})
+  const seconds = date.getSeconds();
+  return `${date.toDateString()} ${hours}:${minutes}:${seconds} ${label} => ${level}: ${message}`;
+});
 
 const logger = createLogger({
   level: 'info',
@@ -43,7 +43,7 @@ const logger = createLogger({
       maxFiles: '14d',
     }),
   ],
-})
+});
 
 const errorLogger = createLogger({
   level: 'error',
@@ -70,6 +70,6 @@ const errorLogger = createLogger({
       maxFiles: '14d',
     }),
   ],
-})
+});
 
-export { logger, errorLogger }
+export { logger, errorLogger };

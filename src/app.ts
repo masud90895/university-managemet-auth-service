@@ -1,27 +1,27 @@
 //import express from "express";
-import { Application } from 'express'
-import express from 'express'
-import cors from 'cors'
-import globalErrorHandler from './app/middlewares/globalErrorHandler'
-import { UserRoute } from './app/modules/user/user.route'
+import { Application } from 'express';
+import express from 'express';
+import cors from 'cors';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import { UserRoute } from './app/modules/user/user.route';
 
-const app: Application = express()
-const port = 5000
+const app: Application = express();
+const port = 5000;
 
 //parse json
-app.use(express.json())
+app.use(express.json());
 //url encoded
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
+app.use(cors());
 
 //application  route
 
-app.use('/api/v1/users/', UserRoute)
+app.use('/api/v1/users/', UserRoute);
 
 // use globalErrorHandler
-app.use(globalErrorHandler)
+app.use(globalErrorHandler);
 
 // console.log("object");
 
-export { app, port }
+export { app, port };
