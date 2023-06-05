@@ -1,5 +1,5 @@
 //import express from "express";
-import { Application /* NextFunction, Request, Response */ } from 'express'
+import { Application } from 'express'
 import express from 'express'
 import cors from 'cors'
 import globalErrorHandler from './app/middlewares/globalErrorHandler'
@@ -18,11 +18,6 @@ app.use(cors())
 //application  route
 
 app.use('/api/v1/users/', UserRoute)
-
-// testing
-// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-//   console.log(x)
-// })
 
 // use globalErrorHandler
 app.use(globalErrorHandler)
