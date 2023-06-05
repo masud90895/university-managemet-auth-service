@@ -5,9 +5,14 @@ import { app } from './app'
 import { errorLogger, logger } from './shared/logger'
 import { Server } from 'http'
 
+process.on('uncaughtException', err => {
+  errorLogger.error(err)
+  process.exit(1)
+})
+
+let server: Server
 // connect mongoose function
 async function main() {
-  let server: Server
   try {
     await mongoose.connect(config.database_url as string)
     server = app.listen(config.port, () => {
@@ -31,3 +36,12 @@ async function main() {
 }
 
 main()
+
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM received, shutting down gracefully')
+  if (server) {
+    server.close(() => {
+      console.log('Process terminated')
+    })
+  }
+})
