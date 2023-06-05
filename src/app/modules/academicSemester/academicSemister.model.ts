@@ -1,13 +1,21 @@
-// create academic semester model
+// create academic semester model by Academic Semester:
+import { Schema, model } from 'mongoose';
+import {
+  AcademicSemesterModel,
+  IAcademicSemester,
+} from './academicSemester.interface';
+import {
+  academicSemesterCode,
+  academicSemesterMonth,
+  academicSemesterTitle,
+} from './academicSemester.constant';
 
-import { Schema } from 'mongoose';
-import { AcademicSemester } from './academicSemester.interface';
-
-const academicSemesterSchema = new Schema<AcademicSemester>(
+const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
     title: {
       type: String,
       required: true,
+      enum: academicSemesterTitle,
     },
     year: {
       type: Number,
@@ -16,14 +24,17 @@ const academicSemesterSchema = new Schema<AcademicSemester>(
     code: {
       type: String,
       required: true,
+      enum: academicSemesterCode,
     },
     startMonth: {
       type: String,
       required: true,
+      enum: academicSemesterMonth,
     },
     endMonth: {
       type: String,
       required: true,
+      enum: academicSemesterMonth,
     },
   },
   {
@@ -31,4 +42,7 @@ const academicSemesterSchema = new Schema<AcademicSemester>(
   }
 );
 
-export default academicSemesterSchema;
+export const AcademicSemester = model<IAcademicSemester, AcademicSemesterModel>(
+  'AcademicSemester',
+  academicSemesterSchema
+);
