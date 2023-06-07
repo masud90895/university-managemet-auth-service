@@ -3,7 +3,7 @@ import { Application } from 'express';
 import express from 'express';
 import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import { UserRoute } from './app/modules/user/user.route';
+import routes from './app/routes';
 
 const app: Application = express();
 const port = 5000;
@@ -16,8 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //application  route
-
-app.use('/api/v1/users/', UserRoute);
+app.use('/api/v1', routes);
 
 // use globalErrorHandler
 app.use(globalErrorHandler);

@@ -1,5 +1,6 @@
 // create academic semester model by Academic Semester:
 import { Schema, model } from 'mongoose';
+import status from 'http-status';
 import {
   AcademicSemesterModel,
   IAcademicSemester,
@@ -9,6 +10,7 @@ import {
   academicSemesterMonth,
   academicSemesterTitle,
 } from './academicSemester.constant';
+import ApiError from '../../../errors/ApiError';
 
 const academicSemesterSchema = new Schema<IAcademicSemester>(
   {
@@ -41,6 +43,18 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
     timestamps: true,
   }
 );
+
+// handling same year and same same semester
+academicSemesterSchema.pre<IAcademicSemester>('save', async function (next) {
+  const isExist = await AcademicSemester.findOne({
+    title: this.title,
+    year: this.year,
+  });
+  if (isExist) {
+    throw new ApiError(status.CONFLICT, 'Academic Semester already exist');
+  }
+  next();
+});
 
 export const AcademicSemester = model<IAcademicSemester, AcademicSemesterModel>(
   'AcademicSemester',
