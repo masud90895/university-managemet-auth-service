@@ -35,7 +35,7 @@ const createAcademicSemester = catchAsync(
 // get all academic semester and pagination
 
 const getAllAcademicSemester = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response) => {
     const filter = pick(req.query, academicSemesterFilterableFields);
 
     const paginationOptions = pick(req.query, paginationFields);
@@ -52,11 +52,59 @@ const getAllAcademicSemester = catchAsync(
       data: result.data,
       meta: result.meta,
     });
-    next();
+  }
+);
+
+// get academic semester controller by Academic Semester:
+const getSingleAcademicSemester = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await AcademicSemesterService.getSingleSemester(id);
+
+    sendResponse<IAcademicSemester>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Success get single academic semester',
+      data: result,
+    });
+  }
+);
+
+// update academic semester controller by Academic Semester:
+const updateAcademicSemester = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const updateData = req.body;
+    const result = await AcademicSemesterService.updateSemester(id, updateData);
+
+    sendResponse<IAcademicSemester>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Success update academic semester',
+      data: result,
+    });
+  }
+);
+
+// delete academic semester controller by Academic Semester:
+const deleteAcademicSemester = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await AcademicSemesterService.deleteSemester(id);
+
+    sendResponse<IAcademicSemester>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Success delete academic semester',
+      data: result,
+    });
   }
 );
 
 export const AcademicSemesterController = {
   createAcademicSemester,
   getAllAcademicSemester,
+  getSingleAcademicSemester,
+  updateAcademicSemester,
+  deleteAcademicSemester,
 };

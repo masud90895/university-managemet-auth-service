@@ -7,9 +7,10 @@ import ApiError from '../../errors/ApiError';
 import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
 import handleZodError from '../../errors/handleZodError';
+import handleCastError from '../../errors/handleCastError';
 
 //create global express error middleware
-const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (error, req, res) => {
   if (config?.env === 'development') {
     console.log('Global Error Handler ~~', error);
   } else {
@@ -54,6 +55,11 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
           },
         ]
       : [];
+  } else if (error?.name === 'CastError') {
+    const simplifiedErrors = handleCastError(error);
+    statusCode = simplifiedErrors.statusCode;
+    message = simplifiedErrors.message;
+    errorMessage = simplifiedErrors.errorMessage;
   }
 
   res.status(statusCode).json({
@@ -62,7 +68,6 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     errorMessage,
     stack: config.env !== 'production' ? error.stack : undefined,
   });
-  next();
 };
 
 export default globalErrorHandler;
