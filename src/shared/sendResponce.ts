@@ -4,6 +4,11 @@ type IResponseData<T> = {
   statusCode: number;
   success: boolean;
   message?: string | null;
+  meta?: {
+    page?: number;
+    limit?: number;
+    total?: number;
+  } | null;
   data?: T | null;
 };
 
@@ -13,6 +18,7 @@ const sendResponse = <T>(res: Response, data: IResponseData<T>): void => {
     success: data.success,
     data: data.data || null,
     message: data.message || null,
+    meta: data.meta || null,
   };
   res.status(data.statusCode).json(responseData);
 };
