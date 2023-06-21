@@ -55,3 +55,8 @@ export type IStudentFilters = {
   contactNo?: string;
   emergencyContactNo?: string;
 };
+
+
+//create student example json  here
+
+
